@@ -10,6 +10,6 @@
 <img src="addedtrans.png" alt="pics of transactions"/>
 
 
-<img src="edittransactions.png" alt="pics of transactions"/>
+<img src="edit.png" alt="pics of transactions"/>
 
 <img src="chart.png" alt="pics of transactions"/>
