@@ -1,0 +1,33 @@
+{
+  "name": "backend-budgetingapp",
+  "version": "1.0.0",
+  "engines": {
+    "node": "17.2.0"
+  },
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meera-ramesh19/backend-budgetingapp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/meera-ramesh19/backend-budgetingapp/issues"
+  },
+  "homepage": "https://github.com/meera-ramesh19/backend-budgetingapp#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "colors": "^1.4.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "express-async-handler": "^1.2.0",
+    "moment": "^2.29.4",
+    "mongoose": "^6.5.0"
+  }
+}

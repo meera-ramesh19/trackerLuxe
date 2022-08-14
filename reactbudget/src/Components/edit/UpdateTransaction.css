@@ -1,0 +1,20 @@
+.edit-trans {
+  display: flex;
+  padding: 5rem 0.5rem;
+  justify-content: center;
+}
+
+form > div {
+  padding: 1rem 0;
+}
+.update-btns input,
+.update-btns button{
+  padding: 3rem;
+  background: transparent;
+  border-radius: 1rem;
+}
+.update-btns:hover {
+  background: rgb(65, 194, 159);
+}
+
+
