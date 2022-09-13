@@ -20,23 +20,6 @@ const NewTransaction = () => {
   const navigate = useNavigate();
   let { id } = useParams();
 
-  //declare states
-  const [transaction, setTransaction] = useState({
-    itemName: '',
-    amount: '',
-    userDate: '',
-    from: '',
-    category: '',
-    type: '',
-  });
-
-  // const [itemName, setItemName] = useState('');
-  // const [amount, setAmount] = useState(0);
-  // const [date, setDate] = useState('');
-  // const [from, setFrom] = useState('');
-  // const [category, setCategory] = useState('');
-  // const [type, setType] = useState('Expense');
-
   var toastMixin = Swal.mixin({
     toast: true,
     icon: 'success',
@@ -97,23 +80,86 @@ const NewTransaction = () => {
     });
   }, [makeShot]);
 
-  // const onChangeValue = (event) => {
-  //   console.log(event.target.value);
-  //   setType({  [event.target.id]: event.target.value });
-  // };
+  const sourcesData = [
+    {
+      stype: 'income',
+      categories: [
+        'Business',
+        'Investments',
+        'Extra income',
+        'Deposits',
+        'Lottery',
+        'Gifts',
+        'Salary',
+        'Savings',
+        'Rental income',
+      ],
+    },
+    {
+      stype: 'expense',
+      categories: [
+        'Bills',
+        'Car',
+        'Clothes',
+        'Travel',
+        'Food',
+        'Shopping',
+        'House',
+        'Entertainment',
+        'Phone',
+        'Pets',
+        'Other',
+      ],
+    },
+  ];
+
+  const [{ types, cat }, setData] = useState({
+    types: 'income',
+    cat: '',
+  });
+
+  const finances = sourcesData.map((source) => (
+    <option key={source.stype} value={source.stype}>
+      {source.stype}
+    </option>
+  ));
+
+  const categories = sourcesData
+    .find((item) => item.stype === types)
+    ?.categories.map((cats) => (
+      <option key={cats} value={cats}>
+        {cats}
+      </option>
+    ));
+  //declare states
+  const [transaction, setTransaction] = useState({
+    itemName: '',
+    amount: '',
+    userDate: '',
+    from: '',
+    category: '',
+    sourceType: '',
+  });
+  // handle change event of the country dropdown
+  const handlefinanceChange = (event) => {
+    console.log('types', event.target.value);
+    setData((data) => ({ cat: '', types: event.target.value }));
+  };
+
+  // handle change event of the language dropdown
+  const handleCatChange = (event) => {
+    console.log('cat', event.target.value);
+    setData((data) => ({ ...data, cat: event.target.value }));
+  };
 
   const handleTextChange = (event) => {
     console.log(event.target.value);
+
     setTransaction({
       ...transaction,
       [event.target.id]: event.target.value,
     });
   };
-
-  // const addTransaction = (transdetails) => {
-  //   let details = [...transaction, transdetails];
-  //   setTransaction(details);
-  // };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -164,7 +210,7 @@ const NewTransaction = () => {
           <input
             id='userDate'
             type='date'
-            // name='date'
+            name='userDate'
             value={transaction.userDate}
             onChange={handleTextChange}
             required
@@ -176,7 +222,7 @@ const NewTransaction = () => {
           <input
             id='from'
             type='text'
-            // name='from'
+            name='from'
             onChange={handleTextChange}
             value={transaction.from}
             required
@@ -184,28 +230,66 @@ const NewTransaction = () => {
           />
         </div>
         <div>
-          <label htmlFor='category'>Category: </label>
-          <input
-            id='category'
+          <label htmlFor='sourceType'>SourceType: </label>
+          {/* <select
+           id='sourceType' 
+           name='sourceType'
+           value={transaction.sourceType}
+           onChange={handleTextChange}>
+             {/* <option>Choose...</option>
+            <option>Income</option>
+            <option>Expense</option> 
+          </select> */}
+          {/* onChange={e => { functionOne(e); functionTwo() }} 
+             or call like this
+             onChange={this.twoCalls}
+             in twocalls
+             twoCalls = e => {
+              this.functionOne(e)
+              this.functionTwo()
+            }*/}
+
+          <select
+            id='sourceType'
             type='text'
-            // name='category'
-            value={transaction.category}
-            placeholder='food etc...'
-            onChange={handleTextChange}
-            required
-          />
+            value={transaction.sourceType}
+            onChange={(e) => {
+              handlefinanceChange(e);
+              handleTextChange(e);
+            }}
+          >
+            {finances}
+          </select>
         </div>
         <div>
-          <label htmlFor='sourcetype'>Type: </label>
-          <input
-            id='sourcetype'
-            type='text'
-            // name='sourceType'
-            value={transaction.sourcetype}
-            placeholder='Enter Income or Expense'
+          <label htmlFor='category'>Category: </label>
+
+          {/* <select
+            className='text'
             onChange={handleTextChange}
-            required
-          />
+            id='category'
+            name='category'
+            value={transaction.categ}
+           >
+           <option className='text' value='⬇️ Select an option ⬇️'>
+              {' '}
+             -- Select an option --{' '}
+             </option> 
+             {console.log(choices)}
+            //  {choices} 
+           
+          </select> */}
+          <select
+            id='category'
+            type='text'
+            value={cat}
+            onChange={(e) => {
+              handleTextChange(e);
+              handleCatChange(e);
+            }}
+          >
+            {categories}
+          </select>
         </div>
 
         <br />
@@ -226,3 +310,8 @@ const NewTransaction = () => {
 };
 
 export default NewTransaction;
+
+// https://stackoverflow.com/questions/64495308/cascade-dropdown-using-react-hooks
+// https://codesandbox.io/s/react-cascading-select-c3hji
+// https://www.cluemediator.com/cascading-dropdown-in-react
+// https://stackoverflow.com/questions/54032379/call-two-functions-within-onchange-event-in-react
