@@ -1,5 +1,8 @@
 # trackerLuxe
 
+
+<img src="home.png" alt="pics of transactions"/>
+
 <img src="alltransactions.png" alt="pics of transactions"/>
 
 <img src="transactiondetails.png" alt="pics of transactions"/>
