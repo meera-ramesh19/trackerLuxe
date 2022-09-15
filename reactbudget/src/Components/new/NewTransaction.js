@@ -50,8 +50,7 @@ const NewTransaction = () => {
       });
   }, []);
 
-  const fire = useCallback(() => {
-    console.log('here');
+  const fire = useCallback(() => { 
     makeShot(0.25, {
       spread: 26,
       startVelocity: 55,
@@ -159,23 +158,25 @@ const NewTransaction = () => {
       ...transaction,
       [event.target.id]: event.target.value,
     });
+    console.log('in text change',transaction)
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
+   console.log('inhandlesumbit',transaction)
     axios
       .post(`${API}/api/transactions`, transaction)
       .then(() => {
-        document
-          .querySelector('.second')
-          .addEventListener('click', function () {
-            toastMixin.fire({
-              animation: true,
-              title: 'Added a transaction',
-            });
-          });
-        navigate(`/transactions`);
+        console.log('added')
+        // document
+        //   .querySelector('.second')
+        //   .addEventListener('click', function () {
+        //     toastMixin.fire({
+        //       animation: true,
+        //       title: 'Added a transaction',
+        //     });
+        //   });
+        // navigate(`/transactions`);
       })
       .catch((c) => console.error('catch', c));
   };

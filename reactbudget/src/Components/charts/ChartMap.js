@@ -89,8 +89,9 @@ const ChartMap = (props) => {
     type: 'doughnut',
     data: data,
     options: {
-      maintainAspectRatio: false,
       responsive: true,
+      maintainAspectRatio: false,
+     
       plugins: {
         legend: {
           position: 'top',
@@ -103,12 +104,11 @@ const ChartMap = (props) => {
     },
   };
   const doughnutData = {
-    // labels:dates,
-    width:100,
-    height:100,
+    labels:dates,
+   
     datasets: [
       {
-        label: dates,
+        label: 'income',
         data:incomeArr,
         backgroundColor: barColors,
         borderColor: 'rgba(255, 99, 132, 1)',
@@ -137,11 +137,15 @@ const ChartMap = (props) => {
     ],
   };
   return (
-    <div style={{ display:'block',justifyContent:'center',alignItems:'center'}}>
-         <Doughnut style={{width:'300px',height:'300px'}} data={doughnutData} config={config}/> 
-         <Doughnut style={{width:'300px',height:'300px'}} data={doughnutData2} config={config}/> 
-      {/* <Bar style={{width:'50%',height:'50%'}} options={options} data={data} />
-      <Bar style={{width:'50%',height:'50%'}} options={options} data={data2} /> */}
+    <div style={{  marginTop:'100px',position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)',display:'block',}}>
+        <div style={{ display:'flex',justifyContent:'center',alignItems:'center',height:'300px',width: '300px',}}>
+         <Doughnut  data={doughnutData} config={config}/> 
+         <Doughnut  data={doughnutData2} config={config}/> 
+         </div>
+        <div style={{ display:'flex',justifyContent:'center',alignItems:'center',height:'500px',width: '500px'}}>
+         <Bar  options={options} data={data} />
+         <Bar  options={options} data={data2} />
+        </div>
     </div>
   );
 };
