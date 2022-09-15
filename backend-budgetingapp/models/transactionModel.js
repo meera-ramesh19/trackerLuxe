@@ -19,15 +19,15 @@ const transactionSchema = mongoose.Schema(
       type: String,
       required: [true, 'Please add a text value'],
     },
-
-    category: {
-      type: String,
-      required: [true, 'Please add a text value'],
-    },
     sourcetype: {
       type: String,
       required: [true, 'Please type in income/expense'],
     },
+    category: {
+      type: String,
+      required: [true, 'Please add a text value'],
+    }
+    
   },
   {
     timestamps: true,

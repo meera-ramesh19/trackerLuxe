@@ -26,6 +26,7 @@ const singleTransactions = asyncHandler(async (req, res) => {
 // // @desc    Set transaction
 // // @route   POST /api/transactions
 const setTransaction = asyncHandler(async (req, res) => {
+  console.log(req.body)
   if (!req.body.itemName) {
     res.status(400);
     throw new Error('Please add a text field');
