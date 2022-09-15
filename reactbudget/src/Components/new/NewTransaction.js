@@ -168,15 +168,15 @@ const NewTransaction = () => {
       .post(`${API}/api/transactions`, transaction)
       .then(() => {
         console.log('added')
-        // document
-        //   .querySelector('.second')
-        //   .addEventListener('click', function () {
-        //     toastMixin.fire({
-        //       animation: true,
-        //       title: 'Added a transaction',
-        //     });
-        //   });
-        // navigate(`/transactions`);
+        document
+          .querySelector('.second')
+          .addEventListener('click', function () {
+            toastMixin.fire({
+              animation: true,
+              title: 'Added a transaction',
+            });
+          });
+        navigate(`/transactions`);
       })
       .catch((c) => console.error('catch', c));
   };

@@ -10,6 +10,57 @@ const UpdateTransaction = () => {
 
   const navigate = useNavigate();
 
+  const sourcesData = [
+    {
+      stype: 'income',
+      categories: [
+        'Business',
+        'Investments',
+        'Extra income',
+        'Deposits',
+        'Lottery',
+        'Gifts',
+        'Salary',
+        'Savings',
+        'Rental income',
+      ],
+    },
+    {
+      stype: 'expense',
+      categories: [
+        'Bills',
+        'Car',
+        'Clothes',
+        'Travel',
+        'Food',
+        'Shopping',
+        'House',
+        'Entertainment',
+        'Phone',
+        'Pets',
+        'Other',
+      ],
+    },
+  ];
+
+  const [{ types, cat }, setData] = useState({
+    types: 'income',
+    cat: '',
+  });
+
+  const finances = sourcesData.map((source) => (
+    <option key={source.stype} value={source.stype}>
+      {source.stype}
+    </option>
+  ));
+
+  const categories = sourcesData
+    .find((item) => item.stype === types)
+    ?.categories.map((cats) => (
+      <option key={cats} value={cats}>
+        {cats}
+      </option>
+    ));
   const [transaction, setTransaction] = useState({
     // transId: '',
     itemName: '',
@@ -51,6 +102,18 @@ const UpdateTransaction = () => {
       })
       .catch((e) => console.error(e));
   }, [id]);
+
+  // handle change event of the country dropdown
+  const handlefinanceChange = (event) => {
+    console.log('types', event.target.value);
+    setData((data) => ({ cat: '', types: event.target.value }));
+  };
+
+  // handle change event of the language dropdown
+  const handleCatChange = (event) => {
+    console.log('cat', event.target.value);
+    setData((data) => ({ ...data, cat: event.target.value }));
+  };
 
   const onInputChange = (event) => {
     console.log(event.target.value);
@@ -126,20 +189,10 @@ const UpdateTransaction = () => {
             onChange={onInputChange}
           />
         </div>
-        <div>
-          <label htmlFor='category'>Category:</label>
-          <input
-            id='category'
-            type='category'
-            name='category'
-            value={transaction.category}
-            onChange={onInputChange}
-          />
-        </div>
 
         <div>
           <label htmlFor='sourcetype'>Type: </label>
-          <input
+          {/* <input
             id='sourcetype'
             type='text'
             name='sourcetype'
@@ -147,7 +200,39 @@ const UpdateTransaction = () => {
             placeholder='Enter Income or Expense'
             onChange={onInputChange}
             required
-          />
+          /> */}
+          <select
+            id='sourceType'
+            type='text'
+            value={transaction.sourceType}
+            onChange={(e) => {
+              handlefinanceChange(e);
+              onInputChange(e);
+            }}
+          >
+            {finances}
+          </select>
+        </div>
+        <div>
+          <label htmlFor='category'>Category:</label>
+          {/* <input
+            id='category'
+            type='category'
+            name='category'
+            value={transaction.category}
+            onChange={onInputChange}
+          /> */}
+          <select
+            id='category'
+            type='text'
+            value={cat}
+            onChange={(e) => {
+              onInputChange(e);
+              handleCatChange(e);
+            }}
+          >
+            {categories}
+          </select>
         </div>
 
         <div

@@ -7,7 +7,7 @@ import {
   Title,
   Tooltip,
   Legend,
-  ArcElement
+  ArcElement,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import { Doughnut } from 'react-chartjs-2';
@@ -19,12 +19,11 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  ArcElement,
-
+  ArcElement
 );
 
 const ChartMap = (props) => {
-  const { dates,incomeArr, expenseArr, nameArr } = props;
+  const { dates, incomeArr, expenseArr, nameArr } = props;
 
   const options = {
     responsive: true,
@@ -40,11 +39,11 @@ const ChartMap = (props) => {
   };
 
   const data = {
-    labels:dates,
+    labels: dates,
     datasets: [
       {
         label: 'income',
-        data:incomeArr,
+        data: incomeArr,
         backgroundColor: 'rgba(255, 99, 132, 0.5)',
         borderColor: 'rgba(255, 99, 132, 1)',
         borderWidth: 1,
@@ -58,16 +57,10 @@ const ChartMap = (props) => {
       // },
     ],
   };
-  const barColors = [
-    "#b91d47",
-    "#00aba9",
-    "#2b5797",
-    "#e8c3b9",
-    "#1e7145"
-  ];
+  const barColors = ['#b91d47', '#00aba9', '#2b5797', '#e8c3b9', '#1e7145'];
 
   const data2 = {
-    labels:dates,
+    labels: dates,
     datasets: [
       // {
       //   label: dates,
@@ -91,34 +84,33 @@ const ChartMap = (props) => {
     options: {
       responsive: true,
       maintainAspectRatio: false,
-     
+
       plugins: {
         legend: {
           position: 'top',
         },
         title: {
           display: true,
-          text: 'Chart.js Doughnut Chart'
-        }
-      }
+          text: 'Chart.js Doughnut Chart',
+        },
+      },
     },
   };
   const doughnutData = {
-    labels:dates,
-   
+    labels: dates,
+
     datasets: [
       {
         label: 'income',
-        data:incomeArr,
+        data: incomeArr,
         backgroundColor: barColors,
         borderColor: 'rgba(255, 99, 132, 1)',
         borderWidth: 1,
       },
-      
     ],
   };
   const doughnutData2 = {
-    labels:dates,
+    labels: dates,
     datasets: [
       // {
       //   label: dates,
@@ -137,15 +129,40 @@ const ChartMap = (props) => {
     ],
   };
   return (
-    <div style={{  marginTop:'100px',position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)',display:'block',}}>
-        <div style={{ display:'flex',justifyContent:'center',alignItems:'center',height:'300px',width: '300px',}}>
-         <Doughnut  data={doughnutData} config={config}/> 
-         <Doughnut  data={doughnutData2} config={config}/> 
-         </div>
-        <div style={{ display:'flex',justifyContent:'center',alignItems:'center',height:'500px',width: '500px'}}>
-         <Bar  options={options} data={data} />
-         <Bar  options={options} data={data2} />
-        </div>
+    <div
+      style={{
+        marginTop: '100px',
+        position: 'absolute',
+        left: '50%',
+        top: '50%',
+        transform: 'translate(-50%, -50%)',
+        display: 'block',
+      }}
+    >
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '300px',
+          width: '300px',
+        }}
+      >
+        <Doughnut data={doughnutData} config={config} />
+        <Doughnut data={doughnutData2} config={config} />
+      </div>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '500px',
+          width: '500px',
+        }}
+      >
+        <Bar options={options} data={data} />
+        <Bar options={options} data={data2} />
+      </div>
     </div>
   );
 };
